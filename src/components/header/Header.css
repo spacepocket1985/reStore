@@ -1,0 +1,11 @@
+.menu {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  list-style: none;
+}
+
+.menu li {
+    border: 1px solid grey;
+    padding: 5px;
+}
