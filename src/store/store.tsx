@@ -7,4 +7,4 @@ const rootReducer = combineReducers({
   books: booksStoreReducer,
 
 });
-export const store = createStore(rootReducer);
+export const Store = createStore(rootReducer);
