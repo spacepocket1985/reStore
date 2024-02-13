@@ -1,3 +1,10 @@
+import BookList from '../components/bookList/BookList';
+
 export const HomePage = () => {
-    return (<h3>Home Page</h3>)
-}
+  return (
+    <>
+      <h2>Home page</h2>
+      <BookList />
+    </>
+  );
+};

@@ -1,19 +1,23 @@
-import { BookType } from "../../components/types/types";
-import { ActionBooksLoadedType } from "../actions/actions";
+import { v1 } from 'uuid';
+import { BookType } from '../../components/types/types';
+import { ActionBooksLoadedType } from '../actions/actions';
 
-const initialState = {
-  books: Array <BookType>,
+type InitialStateType =  {
+  books: Array<BookType>;
 };
 
-export const booksStoreReducer = (state = initialState, action: ActionBooksLoadedType) => {
+const initialState: InitialStateType = {
+  books: [],
+};
 
+export const booksStoreReducer = (
+  state = initialState,
+  action: ActionBooksLoadedType
+) => {
   switch (action.type) {
     case 'BOOKS_LOADED':
-    return {
-      books: action.payload
-    } 
-    default: return state
+      return { ...state, books: action.payload };
+    default:
+      return state;
   }
-
-
 };

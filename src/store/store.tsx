@@ -4,7 +4,7 @@ import { booksStoreReducer } from "./reducers/reducer";
 export type AppRootState = ReturnType<typeof rootReducer>;
 
 const rootReducer = combineReducers({
-  books: booksStoreReducer,
+  booksList: booksStoreReducer,
 
 });
 export const Store = createStore(rootReducer);
