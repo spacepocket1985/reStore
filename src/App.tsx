@@ -7,6 +7,7 @@ import { AppRouter } from './routes/AppRouter';
 import { Header } from './components/header/Header';
 
 import './App.css';
+import ShoppingCartTable from './components/shoppingCartTable/ShoppingCartTable';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Router>
           <Header />
           <AppRouter />
+          <ShoppingCartTable/>
         </Router>
       </ErrorBoundary>
     </Provider>

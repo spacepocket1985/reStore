@@ -35,7 +35,7 @@ const BookList = (props: BookListPropsType) => {
       {books.length === 0 ? (
         <p>No books available</p>
       ) : (
-        <ul>
+        <ul className='book-list'>
           {books.map((book) => {
             return (
               <li key={book.id}>
