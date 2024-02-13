@@ -10,9 +10,11 @@ import { bookStoreService } from '../../services/bookStoreService';
 import { BookType } from '../types/types';
 
 import './BookList.css';
+import { Spinner } from '../spinner/Spinner';
 
 type MapStateToPropsType = {
   books: Array<BookType>;
+  loading: boolean;
 };
 
 type MapDispatchToPropsType = {
@@ -23,7 +25,7 @@ type BookListPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const BookList = (props: BookListPropsType) => {
   const { getBook } = bookStoreService();
-  const { books, booksLoadedAC } = props;
+  const { books, booksLoadedAC, loading } = props;
 
   useEffect(() => {
     getBook().then((data) => {
@@ -31,27 +33,29 @@ const BookList = (props: BookListPropsType) => {
     });
   }, []);
 
+  const spinner = loading ? <Spinner /> : null;
+  const content = !loading ? (
+    <ul className="book-list">
+      {books.map((book) => {
+        return (
+          <li key={book.id}>
+            <BookListItem book={book} />
+          </li>
+        );
+      })}
+    </ul>
+  ) : null;
+
   return (
     <>
-      {books.length === 0 ? (
-        <p>No books available</p>
-      ) : (
-        <ul className="book-list">
-          {books.map((book) => {
-            return (
-              <li key={book.id}>
-                <BookListItem book={book} />
-              </li>
-            );
-          })}
-        </ul>
-      )}
+      {spinner}
+      {content}
     </>
   );
 };
 
 const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
-  return { books: state.booksList.books };
+  return { books: state.booksList.books, loading: state.booksList.loading };
 };
 
 const mapDispatchToProps = { booksLoadedAC };
