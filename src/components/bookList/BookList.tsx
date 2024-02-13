@@ -5,7 +5,7 @@ import {
   booksRequestedAC,
   booksLoadedAC,
   booksErrorAC,
-
+  addBookToCartAC,
 } from '../../store/actions/actions';
 import { AppRootState } from '../../store/store';
 import { BookListItem } from '../bookListItem/BookListItem';
@@ -24,20 +24,16 @@ type MapStateToPropsType = {
 
 type MapDispatchToPropsType = {
   fetchBooks: () => void;
+  onAddToCart: (book: BookType) => void;
 };
 
 type BookListPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
 const BookList = (props: BookListPropsType) => {
-  const {
-    books,
-    loading,
-    error,
-    fetchBooks
-  } = props;
+  const { books, loading, error, fetchBooks, onAddToCart } = props;
 
   useEffect(() => {
-    fetchBooks()
+    fetchBooks();
   }, []);
 
   const renderBooks = (books: BookType[]) => {
@@ -46,7 +42,7 @@ const BookList = (props: BookListPropsType) => {
         {books.map((book) => {
           return (
             <li key={book.id}>
-              <BookListItem book={book} />
+              <BookListItem book={book} onAddToCart={()=>{onAddToCart(book)}} />
             </li>
           );
         })}
@@ -75,7 +71,6 @@ const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
   };
 };
 
-
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   const { getBook } = bookStoreService();
 
@@ -86,8 +81,11 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
         .then((data) => {
           dispatch(booksLoadedAC(data));
         })
-        .catch((error)=>{dispatch(booksErrorAC(error))});
+        .catch((error) => {
+          dispatch(booksErrorAC(error));
+        });
     },
+    onAddToCart:(book: BookType)=>{dispatch(addBookToCartAC(book))}
   };
 };
 

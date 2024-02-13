@@ -3,5 +3,12 @@ export type BookType = {
   title: string;
   author: string;
   coverImage?: string | undefined;
-  price: number
+  price: number;
+};
+
+export type CartItemType = {
+  id: string;
+  name: string;
+  count: number;
+  totalPrice: number;
 };
