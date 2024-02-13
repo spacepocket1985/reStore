@@ -26,8 +26,9 @@ const BookList = (props: BookListPropsType) => {
   const { books, booksLoadedAC } = props;
 
   useEffect(() => {
-    const data = getBook();
-    booksLoadedAC(data);
+    getBook().then((data) => {
+      booksLoadedAC(data);
+    });
   }, []);
 
   return (
@@ -35,7 +36,7 @@ const BookList = (props: BookListPropsType) => {
       {books.length === 0 ? (
         <p>No books available</p>
       ) : (
-        <ul className='book-list'>
+        <ul className="book-list">
           {books.map((book) => {
             return (
               <li key={book.id}>

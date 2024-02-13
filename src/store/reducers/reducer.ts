@@ -3,7 +3,8 @@ import { BookType } from '../../components/types/types';
 import { ActionBooksLoadedType } from '../actions/actions';
 
 type InitialStateType =  {
-  books: Array<BookType>;
+  books: Array<BookType>,
+  
 };
 
 const initialState: InitialStateType = {

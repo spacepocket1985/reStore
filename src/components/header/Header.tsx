@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RoutePaths } from '../../routes/routePaths';
-import ShopHeader from '../shopHeader/shopHeader';
+import ShopHeader from '../shopHeader/ShopHeader';
+
 
 import './Header.css';
 
