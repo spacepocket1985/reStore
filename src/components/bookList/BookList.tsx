@@ -76,7 +76,7 @@ const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
 };
 
 
-const mapDispatchToProps = (dispatch: Dispatch) => {
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
   const { getBook } = bookStoreService();
 
   return {

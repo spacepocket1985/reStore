@@ -25,11 +25,11 @@ export const booksStoreReducer = (
   action: ActionsType
 ) => {
   switch (action.type) {
-    case 'BOOKS_LOADED':
+    case 'FETCH_BOOKS_SUCCESS':
       return { books: action.payload, loading: false, error: null };
-    case 'BOOKS_REQUESTED':
+    case 'FETCH_BOOKS_REQUEST':
       return { books: [], loading: true, error: null };
-    case 'BOOKS_ERROR':
+    case 'FETCH_BOOKS_FAILURE':
       return {books: [], loading: false, error: action.payload.message}
     default:
       return state;
