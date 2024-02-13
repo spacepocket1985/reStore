@@ -22,9 +22,13 @@ export const bookStoreService = () => {
   ];
 
   const getBook = (): Promise<Array<BookType>> => {
-    return new Promise((resolve) => {
+    return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(data);
+        if (Math.random() > 0.75) {
+          reject(new Error('We have some problems!'));
+        } else {
+          resolve(data);
+        }
       }, 700);
     });
   };
