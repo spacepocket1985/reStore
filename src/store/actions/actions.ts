@@ -83,10 +83,13 @@ export const decreaseBookInCartAC = (
   };
 };
 
-export type ActionsType =
+export type ActionsBooksListType =
   | ActionBooksLoadedType
   | ActionBooksRequestedType
-  | ActionBooksErrorType
+  | ActionBooksErrorType;
+  
+
+export type ActionsShopingCartType =
   | ActionAddBookToCart
   | ActionDeleteBookInCart
   | ActionDecreaseBookInCart

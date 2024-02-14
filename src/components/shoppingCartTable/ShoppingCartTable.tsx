@@ -97,8 +97,8 @@ const ShoppingCartTable = (props: ShoppingCartTablePropsType) => {
 
 const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
   return {
-    cartItems: state.booksList.cartItems,
-    total: state.booksList.total,
+    cartItems: state.shoppingCart.cartItems,
+    total: state.shoppingCart.total,
   };
 };
 

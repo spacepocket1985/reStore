@@ -12,7 +12,7 @@ export const ErrorIndicator = (props: ErrorIndicatorProps) => {
       <span className="boom">BOOM!</span>
       <span>something has gone terribly wrong</span>
       <span>(but we already sent droids to fix it)</span>
-      <p>{props.errorMsg}</p>
+      <p className='err-msg'>{props.errorMsg}</p>
     </div>
   );
 };

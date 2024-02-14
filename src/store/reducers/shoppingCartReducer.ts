@@ -1,17 +1,14 @@
 import { v1 } from 'uuid';
-import { BookType, CartItemType } from '../../types/types';
-import { ActionsType } from '../actions/actions';
+import { CartItemType } from '../../types/types';
+import { ActionsShopingCartType } from '../actions/actions';
 
-export type InitialStateType = {
-  books: Array<BookType>;
+export type ShoppingCartStateType = {
   cartItems: Array<CartItemType>;
   total: number;
-  loading: boolean;
-  error: string | null;
 };
 
-const initialState: InitialStateType = {
-  books: [],
+const initialState: ShoppingCartStateType = {
+
   cartItems: [
     {
       id: v1(),
@@ -26,27 +23,14 @@ const initialState: InitialStateType = {
       totalPrice: 540,
     },
   ],
-  total: 780,
-  loading: true,
-  error: null,
+  total: 0,
 };
 
-export const booksStoreReducer = (
+export const shoppingCartReducer = (
   state = initialState,
-  action: ActionsType
+  action: ActionsShopingCartType
 ) => {
   switch (action.type) {
-    case 'FETCH_BOOKS_SUCCESS':
-      return { ...state, books: action.payload, loading: false, error: null };
-    case 'FETCH_BOOKS_REQUEST':
-      return { ...state, books: [], loading: true, error: null };
-    case 'FETCH_BOOKS_FAILURE':
-      return {
-        ...state,
-        books: [],
-        loading: false,
-        error: action.payload.message,
-      };
     case 'ADD_BOOK_TO_CART':
       const isBookinCart = state.cartItems.find(
         (item) => item.id === action.payload.id

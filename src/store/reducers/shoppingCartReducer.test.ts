@@ -2,13 +2,13 @@ import { v1 } from 'uuid';
 import { expect, test } from 'vitest';
 import { BookType } from '../../types/types';
 import { addBookToCartAC, deleteBookInCartAC } from '../actions/actions';
+import { shoppingCartReducer, ShoppingCartStateType } from './shoppingCartReducer';
 
-import { booksStoreReducer, InitialStateType } from './reducer';
+
 
 test('must add the book to cart correctly', () => {
 
-  const startState: InitialStateType = {
-    books: [],
+  const startState: ShoppingCartStateType = {
     cartItems: [
       {
         id: v1(),
@@ -24,8 +24,6 @@ test('must add the book to cart correctly', () => {
       },
     ],
     total: 780,
-    loading: true,
-    error: null,
   }; 
 
   const newBook: BookType = {
@@ -36,7 +34,7 @@ test('must add the book to cart correctly', () => {
   }
 
   const action = addBookToCartAC (newBook);
-  const endState = booksStoreReducer(startState, action);
+  const endState = shoppingCartReducer(startState, action);
 
   expect(endState.cartItems.length).toBe(3)
   expect(endState.cartItems[0].title).toBe('Timon and Pumba')
@@ -45,8 +43,7 @@ test('must add the book to cart correctly', () => {
 
 test('must delete book from cart correctly',()=>{
 
-  const startState: InitialStateType = {
-    books: [],
+  const startState: ShoppingCartStateType = {
     cartItems: [
       {
         id: v1(),
@@ -62,13 +59,12 @@ test('must delete book from cart correctly',()=>{
       },
     ],
     total: 780,
-    loading: true,
-    error: null,
+
   }; 
 
   const bookIdForDelete = startState.cartItems[0].id;
   const action = deleteBookInCartAC(bookIdForDelete);
-  const endState = booksStoreReducer(startState, action);
+  const endState = shoppingCartReducer(startState, action);
 
   expect(endState.cartItems.length).toBe(1)
   expect(endState.cartItems.findIndex((item)=>item.id ===action.payload)).toBe(-1)

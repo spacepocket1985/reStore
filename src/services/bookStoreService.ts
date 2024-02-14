@@ -25,7 +25,7 @@ export const bookStoreService = () => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (Math.random() > 0.75) {
-          reject(new Error('We have some problems!'));
+          reject(new Error('We have some problems with fetching data!'));
         } else {
           resolve(data);
         }
