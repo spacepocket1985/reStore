@@ -8,7 +8,7 @@ export type BookType = {
 
 export type CartItemType = {
   id: string;
-  name: string;
+  title: string;
   count: number;
   totalPrice: number;
 };

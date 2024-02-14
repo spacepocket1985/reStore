@@ -1,7 +1,14 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+
 import { AppRootState } from '../../store/store';
 import { CartItemType } from '../types/types';
+import {
+  deleteBookInCartAC,
+  increaseBookInCartAC,
+  decreaseBookInCartAC,
+} from '../../store/actions/actions';
+
 import './ShoppingCartTable.css';
 
 type MapStateToPropsType = {
@@ -22,11 +29,11 @@ const ShoppingCartTable = (props: ShoppingCartTablePropsType) => {
 
   const renderCartItemRow = (cartItems: Array<CartItemType>) => {
     return cartItems.map((cartItem, index) => {
-      const { id, name, count, totalPrice } = cartItem;
+      const { id, title, count, totalPrice } = cartItem;
       return (
         <tr key={id}>
-          <td >{index + 1}</td>
-          <td>{name}</td>
+          <td>{index + 1}</td>
+          <td>{title}</td>
           <td>{count}</td>
           <td>${totalPrice}</td>
           <td>
@@ -95,16 +102,16 @@ const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
   };
 };
 
-const MapStateToDispatch = () => {
+const MapStateToDispatch = (dispatch: Dispatch) => {
   return {
     onIncrease: (id: string) => {
-      console.log('INC ', id);
+      dispatch(increaseBookInCartAC(id));
     },
     onDecrease: (id: string) => {
-      console.log('DEC ', id);
+      dispatch(decreaseBookInCartAC(id));
     },
     onDelete: (id: string) => {
-      console.log('DEL ', id);
+      dispatch(deleteBookInCartAC(id));
     },
   };
 };

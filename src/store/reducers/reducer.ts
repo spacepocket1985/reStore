@@ -5,6 +5,9 @@ import {
   ActionBooksLoadedType,
   ActionBooksRequestedType,
   ActionAddBookToCart,
+  ActionDeleteBookInCart,
+  ActionIncreaseBookInCart,
+  ActionsType,
 } from '../actions/actions';
 
 type InitialStateType = {
@@ -20,13 +23,13 @@ const initialState: InitialStateType = {
   cartItems: [
     {
       id: v1(),
-      name: 'Rambo First Blood',
+      title: 'Rambo First Blood',
       count: 3,
       totalPrice: 240,
     },
     {
       id: v1(),
-      name: 'Terminator 3',
+      title: 'Terminator 3',
       count: 4,
       totalPrice: 540,
     },
@@ -35,12 +38,6 @@ const initialState: InitialStateType = {
   loading: true,
   error: null,
 };
-
-type ActionsType =
-  | ActionBooksLoadedType
-  | ActionBooksRequestedType
-  | ActionBooksErrorType
-  | ActionAddBookToCart;
 
 export const booksStoreReducer = (
   state = initialState,
@@ -59,15 +56,15 @@ export const booksStoreReducer = (
         error: action.payload.message,
       };
     case 'ADD_BOOK_TO_CART':
-      const temp = state.cartItems.find(
+      const isBookinCart = state.cartItems.find(
         (item) => item.id === action.payload.id
       );
 
-      const newCartItems = !temp
+      const newCartItems = !isBookinCart
         ? [
             {
               id: action.payload.id,
-              name: action.payload.title,
+              title: action.payload.title,
               count: 1,
               totalPrice: action.payload.price,
             },
@@ -86,6 +83,25 @@ export const booksStoreReducer = (
         ...state,
         cartItems: newCartItems,
       };
+    case 'DELETE_BOOK_IN_CART':
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+      };
+    case 'INCREASE_BOOK_IN_CART':
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) =>
+          item.id !== action.payload ? item : { ...item, count: item.count + 1, totalPrice: item.totalPrice + item.totalPrice/item.count }
+        ),
+      };
+    case 'DECREASE_BOOK_IN_CART' : 
+    return {
+      ...state,
+      cartItems: state.cartItems.map((item) =>
+        item.id !== action.payload || item.count === 1 ? item : { ...item, count: item.count - 1, totalPrice: item.totalPrice - item.totalPrice/item.count }
+      ),
+    }
     default:
       return state;
   }

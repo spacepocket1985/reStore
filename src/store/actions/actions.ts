@@ -42,3 +42,52 @@ export const addBookToCartAC = (book: BookType): ActionAddBookToCart => {
     payload: book,
   };
 };
+
+export type ActionDeleteBookInCart = {
+  type: 'DELETE_BOOK_IN_CART';
+  payload: string;
+};
+
+export const deleteBookInCartAC = (bookId: string): ActionDeleteBookInCart => {
+  return {
+    type: 'DELETE_BOOK_IN_CART',
+    payload: bookId,
+  };
+};
+
+export type ActionIncreaseBookInCart = {
+  type: 'INCREASE_BOOK_IN_CART';
+  payload: string;
+};
+
+export const increaseBookInCartAC = (
+  bookId: string
+): ActionIncreaseBookInCart => {
+  return {
+    type: 'INCREASE_BOOK_IN_CART',
+    payload: bookId,
+  };
+};
+
+export type ActionDecreaseBookInCart = {
+  type: 'DECREASE_BOOK_IN_CART';
+  payload: string;
+};
+
+export const decreaseBookInCartAC = (
+  bookId: string
+): ActionDecreaseBookInCart => {
+  return {
+    type: 'DECREASE_BOOK_IN_CART',
+    payload: bookId,
+  };
+};
+
+export type ActionsType =
+  | ActionBooksLoadedType
+  | ActionBooksRequestedType
+  | ActionBooksErrorType
+  | ActionAddBookToCart
+  | ActionDeleteBookInCart
+  | ActionDecreaseBookInCart
+  | ActionIncreaseBookInCart;
