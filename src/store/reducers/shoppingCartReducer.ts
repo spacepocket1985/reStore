@@ -1,5 +1,6 @@
 import { v1 } from 'uuid';
 import { CartItemType } from '../../types/types';
+import { findBookInCart } from '../../utils/findBookInCart';
 import { ActionsShopingCartType } from '../actions/actions';
 
 export type ShoppingCartStateType = {
@@ -7,8 +8,8 @@ export type ShoppingCartStateType = {
   total: number;
 };
 
-const initialState: ShoppingCartStateType = {
 
+const initialState: ShoppingCartStateType = {
   cartItems: [
     {
       id: v1(),
@@ -23,7 +24,7 @@ const initialState: ShoppingCartStateType = {
       totalPrice: 540,
     },
   ],
-  total: 0,
+  total: 780,
 };
 
 export const shoppingCartReducer = (
@@ -58,11 +59,15 @@ export const shoppingCartReducer = (
       return {
         ...state,
         cartItems: newCartItems,
+        total: newCartItems.reduce((acc, item) => acc + item.totalPrice, 0),
       };
     case 'DELETE_BOOK_IN_CART':
+      
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
+        total: state.total - findBookInCart(state, action.payload)
+        
       };
     case 'INCREASE_BOOK_IN_CART':
       return {

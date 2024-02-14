@@ -24,7 +24,7 @@ export const bookStoreService = () => {
   const getBook = (): Promise<Array<BookType>> => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        if (Math.random() > 0.75) {
+        if (Math.random() > 0.9) {
           reject(new Error('We have some problems with fetching data!'));
         } else {
           resolve(data);
