@@ -1,4 +1,4 @@
-import { BookType } from '../types/types';
+import { BookType } from '../../types/types';
 import './BookListItem.css';
 
 type BookListItemPropsType = {

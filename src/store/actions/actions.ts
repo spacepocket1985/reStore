@@ -1,4 +1,4 @@
-import { BookType } from '../../components/types/types';
+import { BookType } from '../../types/types';
 
 export type ActionBooksLoadedType = {
   type: 'FETCH_BOOKS_SUCCESS';

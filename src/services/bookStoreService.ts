@@ -1,5 +1,5 @@
 import { v1 } from 'uuid';
-import { BookType } from '../components/types/types';
+import { BookType } from '../types/types';
 
 export const bookStoreService = () => {
   const data: Array<BookType> = [

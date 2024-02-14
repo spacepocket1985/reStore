@@ -1,16 +1,8 @@
 import { v1 } from 'uuid';
-import { BookType, CartItemType } from '../../components/types/types';
-import {
-  ActionBooksErrorType,
-  ActionBooksLoadedType,
-  ActionBooksRequestedType,
-  ActionAddBookToCart,
-  ActionDeleteBookInCart,
-  ActionIncreaseBookInCart,
-  ActionsType,
-} from '../actions/actions';
+import { BookType, CartItemType } from '../../types/types';
+import { ActionsType } from '../actions/actions';
 
-type InitialStateType = {
+export type InitialStateType = {
   books: Array<BookType>;
   cartItems: Array<CartItemType>;
   total: number;
@@ -92,16 +84,28 @@ export const booksStoreReducer = (
       return {
         ...state,
         cartItems: state.cartItems.map((item) =>
-          item.id !== action.payload ? item : { ...item, count: item.count + 1, totalPrice: item.totalPrice + item.totalPrice/item.count }
+          item.id !== action.payload
+            ? item
+            : {
+                ...item,
+                count: item.count + 1,
+                totalPrice: item.totalPrice + item.totalPrice / item.count,
+              }
         ),
       };
-    case 'DECREASE_BOOK_IN_CART' : 
-    return {
-      ...state,
-      cartItems: state.cartItems.map((item) =>
-        item.id !== action.payload || item.count === 1 ? item : { ...item, count: item.count - 1, totalPrice: item.totalPrice - item.totalPrice/item.count }
-      ),
-    }
+    case 'DECREASE_BOOK_IN_CART':
+      return {
+        ...state,
+        cartItems: state.cartItems.map((item) =>
+          item.id !== action.payload || item.count === 1
+            ? item
+            : {
+                ...item,
+                count: item.count - 1,
+                totalPrice: item.totalPrice - item.totalPrice / item.count,
+              }
+        ),
+      };
     default:
       return state;
   }

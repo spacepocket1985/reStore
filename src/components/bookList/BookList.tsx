@@ -10,7 +10,7 @@ import {
 import { AppRootState } from '../../store/store';
 import { BookListItem } from '../bookListItem/BookListItem';
 import { bookStoreService } from '../../services/bookStoreService';
-import { BookType } from '../types/types';
+import { BookType } from '../../types/types';
 
 import './BookList.css';
 import { Spinner } from '../spinner/Spinner';
@@ -42,7 +42,12 @@ const BookList = (props: BookListPropsType) => {
         {books.map((book) => {
           return (
             <li key={book.id}>
-              <BookListItem book={book} onAddToCart={()=>{onAddToCart(book)}} />
+              <BookListItem
+                book={book}
+                onAddToCart={() => {
+                  onAddToCart(book);
+                }}
+              />
             </li>
           );
         })}
@@ -85,7 +90,9 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
           dispatch(booksErrorAC(error));
         });
     },
-    onAddToCart:(book: BookType)=>{dispatch(addBookToCartAC(book))}
+    onAddToCart: (book: BookType) => {
+      dispatch(addBookToCartAC(book));
+    },
   };
 };
 

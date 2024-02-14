@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 
 import { AppRootState } from '../../store/store';
-import { CartItemType } from '../types/types';
+import { CartItemType } from '../../types/types';
 import {
   deleteBookInCartAC,
   increaseBookInCartAC,
