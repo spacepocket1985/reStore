@@ -87,7 +87,6 @@ export type ActionsBooksListType =
   | ActionBooksLoadedType
   | ActionBooksRequestedType
   | ActionBooksErrorType;
-  
 
 export type ActionsShopingCartType =
   | ActionAddBookToCart

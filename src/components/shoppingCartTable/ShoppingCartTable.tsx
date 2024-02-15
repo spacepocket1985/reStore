@@ -57,6 +57,7 @@ const ShoppingCartTable = (props: ShoppingCartTablePropsType) => {
               onClick={() => {
                 onDecrease(id);
               }}
+              disabled={count === 1 ? true : false}
               className="btn btn-outline-warning btn-sm float-right"
             >
               <i className="fa fa-minus-circle" />

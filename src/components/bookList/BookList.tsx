@@ -77,12 +77,12 @@ const mapStateToProps = (state: AppRootState): MapStateToPropsType => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-  const { getBook } = bookStoreService();
+  const { getBooks } = bookStoreService();
 
   return {
     fetchBooks: () => {
       dispatch(booksRequestedAC());
-      getBook()
+      getBooks()
         .then((data) => {
           dispatch(booksLoadedAC(data));
         })

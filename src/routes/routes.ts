@@ -1,3 +1,5 @@
+
+import BookPage from '../pages/bookPage/BookPage';
 import { CartPage } from '../pages/CartPage';
 import { HomePage } from '../pages/HomePage';
 import { Page404 } from '../pages/Page404';
@@ -11,6 +13,10 @@ export const publicRoutes = [
   {
     path: RoutePaths.CART,
     Page: CartPage,
+  },
+  {
+    path: RoutePaths.BOOK,
+    Page: BookPage,
   },
   {
     path: RoutePaths.PAGE404,

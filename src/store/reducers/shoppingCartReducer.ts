@@ -1,6 +1,6 @@
 import { v1 } from 'uuid';
 import { CartItemType } from '../../types/types';
-import { findBookInCart } from '../../utils/findBookInCart';
+import { findBookIndexInCart } from '../../utils/findBookInCart';
 import { ActionsShopingCartType } from '../actions/actions';
 
 export type ShoppingCartStateType = {
@@ -10,27 +10,15 @@ export type ShoppingCartStateType = {
 
 
 const initialState: ShoppingCartStateType = {
-  cartItems: [
-    {
-      id: v1(),
-      title: 'Rambo First Blood',
-      count: 3,
-      totalPrice: 240,
-    },
-    {
-      id: v1(),
-      title: 'Terminator 3',
-      count: 4,
-      totalPrice: 540,
-    },
-  ],
-  total: 780,
+  cartItems: [],
+  total: 0,
 };
 
 export const shoppingCartReducer = (
   state = initialState,
   action: ActionsShopingCartType
 ) => {
+
   switch (action.type) {
     case 'ADD_BOOK_TO_CART':
       const isBookinCart = state.cartItems.find(
@@ -66,7 +54,7 @@ export const shoppingCartReducer = (
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => item.id !== action.payload),
-        total: state.total - findBookInCart(state, action.payload)
+        total: state.total - findBookIndexInCart(state, action.payload).getBookTotalPrice
         
       };
     case 'INCREASE_BOOK_IN_CART':
@@ -81,6 +69,7 @@ export const shoppingCartReducer = (
                 totalPrice: item.totalPrice + item.totalPrice / item.count,
               }
         ),
+        total: state.total + findBookIndexInCart(state, action.payload).getBookPrice
       };
     case 'DECREASE_BOOK_IN_CART':
       return {
@@ -94,6 +83,7 @@ export const shoppingCartReducer = (
                 totalPrice: item.totalPrice - item.totalPrice / item.count,
               }
         ),
+        total: state.total - findBookIndexInCart(state, action.payload).getBookPrice
       };
     default:
       return state;
